@@ -33,7 +33,7 @@ import (
 )
 
 func init() {
-	caddy.RegisterModule(Handler{})
+	caddy.RegisterModule(&Handler{})
 }
 
 // TODO: response matching? Should it be per-replacement or per group of replacements? probably per-handler (a handler is already a group of replacements)...
@@ -55,7 +55,7 @@ type Handler struct {
 }
 
 // CaddyModule returns the Caddy module information.
-func (Handler) CaddyModule() caddy.ModuleInfo {
+func (*Handler) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "http.handlers.replace_response",
 		New: func() caddy.Module { return new(Handler) },
